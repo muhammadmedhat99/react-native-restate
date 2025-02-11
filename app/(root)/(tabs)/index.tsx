@@ -24,13 +24,14 @@ export default function Index() {
 
   const { data: latestProperties, loading: latestPropertiesLoading } =
     useAppwrite({ fn: getLatestProperties });
+
   const {
     data: properties,
     loading: propertiesLoading,
-    refetch,
+    refetch: propertiesRefetch,
   } = useAppwrite({
     fn: getProperties,
-    params: { filter: params.filter!, query: params.query!, limit: 6 },
+    params: { filter: params.filter!, query: params.query!, limit: 8 },
     skip: true,
   });
 
@@ -39,7 +40,11 @@ export default function Index() {
   };
 
   useEffect(() => {
-    refetch({ filter: params.filter!, query: params.query!, limit: 6 });
+    propertiesRefetch({
+      query: params.query!,
+      filter: params.filter!,
+      limit: 8,
+    });
   }, [params.filter, params.query]);
 
   return (
@@ -49,7 +54,7 @@ export default function Index() {
         renderItem={({ item }) => (
           <Card onPress={() => handleCardPress(item?.$id)} item={item} />
         )}
-        keyExtractor={(item, index) => `featured-card-${index}`}
+        keyExtractor={(item) => `featured-card-${item?.$id}`}
         numColumns={2}
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex gap-5 px-5"
@@ -108,7 +113,7 @@ export default function Index() {
                       item={item}
                     />
                   )}
-                  keyExtractor={(item, index) => `recommended-card-${index}`}
+                  keyExtractor={(item) => `recommended-card-${item?.$id}`}
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   bounces={false}

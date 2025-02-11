@@ -37,7 +37,7 @@ export default function Explore() {
   };
 
   useEffect(() => {
-    refetch({ filter: params.filter!, query: params.query!, limit: 20 });
+    refetch({ filter: params.filter!, query: params.query!, limit: 6 });
   }, [params.filter, params.query]);
 
   return (
@@ -45,9 +45,9 @@ export default function Explore() {
       <FlatList
         data={properties}
         renderItem={({ item }) => (
-          <Card onPress={() => handleCardPress(item?.id)} item={item} />
+          <Card onPress={() => handleCardPress(item?.$id)} item={item} />
         )}
-        keyExtractor={(item, index) => `featured-card-${index}`}
+        keyExtractor={(item, index) => `featured-card-${item?.$id}`}
         numColumns={2}
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex gap-5 px-5"
