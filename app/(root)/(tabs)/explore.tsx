@@ -28,7 +28,7 @@ export default function Explore() {
     refetch,
   } = useAppwrite({
     fn: getProperties,
-    params: { filter: params.filter!, query: params.query!, limit: 6 },
+    params: { filter: params.filter!, query: params.query!, limit: 20 },
     skip: true,
   });
 
@@ -37,7 +37,7 @@ export default function Explore() {
   };
 
   useEffect(() => {
-    refetch({ filter: params.filter!, query: params.query!, limit: 6 });
+    refetch({ filter: params.filter!, query: params.query!, limit: 20 });
   }, [params.filter, params.query]);
 
   return (
