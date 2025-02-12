@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  Modal,
   Text,
   TouchableOpacity,
   View,
